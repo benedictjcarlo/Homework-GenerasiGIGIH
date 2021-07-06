@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hands On Module 1 Season 1</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <table id="table" border="1">
+      <tbody></tbody>
+    </table>
+
+    <p>Average nilai student adalah </p>
+    <div id="avg"></div><br>
+    <button id="averageButton">Average</button>
+
+    <script>
+      const students = [
+        {name: "Alice", age: 20},
+        {name: "Bob", age: 21},
+        {name: "Jane", age: 20}
+      ];
+
+      // students.push({name: "John", age: 23});
+
+      const theTable = () => {
+        students.forEach(({name, age}) => {
+          const table = document
+          .getElementById("table")
+          .getElementsByTagName("tbody")[0];
+
+          table.insertRow().innerHTML = `<td>${name}</td><td>${age}</td>`;
+        });
+      };
+
+      const avgCalc = (students) => {
+        const total = students.reduce((acc, student) => acc + student.age, 0);
+        return total / students.length;
+      };
+
+      const handleClick = () => {
+        const avg = avgCalc(students);
+        document.getElementById("avg").innerHTML = avg;
+      }
+      
+      document.getElementById("averageButton").addEventListener("click", handleClick);
+      theTable();
+    </script>
+  </body>
+</html>
