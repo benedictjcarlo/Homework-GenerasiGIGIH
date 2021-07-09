@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hands On Module 1 Session 2</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <table id="table">
+      <thead>
+        <th>
+          <tr>Name</tr>
+          <tr>Age</tr>
+        </th>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p>Average nilai student adalah </p>
+    <div id="average"></div><br>
+
+    <button id="averageButton">Average</button>
+
+    <script>
+      const students = [
+        {name: "Alice", age: 20},
+        {name: "Bob", age: 21},
+        {name: "Jane", age: 20}
+      ];
+
+      const theTable = () => {
+        students.forEach(({name, age}) => {
+          const table = document
+          .getElementById("table")
+          .getElementsByTagName("tbody")[0];
+
+          table.insertRow().innerHTML = `<td>${name}</td><td>${age}</td>`;
+        });
+      };
+
+      theTable();
+
+      const firstCall = () => {
+        console.log("Calculation Start");
+        console.log("Second Call Started");
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("Second Call Finished");
+            console.log("Third Call Started")
+            resolve();
+          }, 2000);
+        });
+      };
+
+      const avgCall = (students) => {
+        return new Promise((resolve) => {
+          const total = students.reduce((acc, student) => acc + student.age, 0);
+          setTimeout(() => {
+            avg = total / students.length;
+            resolve(avg);
+          }, 5000);
+        });
+      };
+
+      const thirdCall = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("Third Call Finished");
+            resolve();
+          }, 5000);
+        });
+      };
+
+      const handleClick = async () => {
+        firstCall();
+        avgCall(students).then((result) => {
+          console.log(`Average Age is ${result}`);
+          document.getElementById("average").innerHTML = result;
+        });
+        thirdCall();
+      };
+
+      document.getElementById("averageButton").addEventListener("click", handleClick);
+    </script>
+  </body>
+</html>
